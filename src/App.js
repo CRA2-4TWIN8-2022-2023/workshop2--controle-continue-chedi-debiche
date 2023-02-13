@@ -3,6 +3,7 @@ import './App.css';
 import ComposantClass from './Components/ComposantClass';
 import ComposantFunct from './Components/ComposantFunct';
 import Product from './Components/Product';
+import Products from './Components/Products';
 
 // const option = (
 //   <ol>
@@ -39,9 +40,10 @@ import Product from './Components/Product';
 function App() {
   return (
     <div className="App">
-      <ComposantClass/>
-      <ComposantFunct/>
-      <Product/>
+      {/* <ComposantClass/> */}
+      {/* <ComposantFunct/> */}
+      {/* <Product/> */}
+      <Products/>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
