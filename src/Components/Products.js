@@ -36,25 +36,34 @@ const Products = () => {
     const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
 
     useEffect(() => {
-      setTimeout(() => {
-        setShowWelcomeMessage(true);
-      }, 3000);
-    }, []);
+      setTimeout(() => {  setShowWelcomeMessage(true);}, 3000);
+     }, []);
   
   return (
-    <Container >
-              {showWelcomeMessage && (
-   <Alert variant="success" onClose={() => setShowWelcomeMessage(false)} dismissible>
-   Hey , Welcome to our Shop <strong>MyStore</strong>
-   <br />
-   <small>Thank you for choosing our store, we hope you enjoy your shopping experience</small>
-    </Alert>
-      )}
-
+    <Container>
+    {showWelcomeMessage && (
+      <Alert variant="success" onClose={() => setShowWelcomeMessage(false)} dismissible>
+        Hey , Welcome to our Shop <strong>MyStore</strong>
+        <br />
+        <small>Thank you for choosing our store, we hope you enjoy your shopping experience</small>
+      </Alert>
+    )}
+  
+    <Row>
       {products.map((product, index) => {
-        return <Product key={index} {...product} />
+        return (
+          <Col sm={4} key={index}>
+            <Product {...product} />
+          </Col>
+        );
       })}
-    </Container>
+    </Row>
+  </Container>
+  
+  
+  
+  
+  
   );
 };
 

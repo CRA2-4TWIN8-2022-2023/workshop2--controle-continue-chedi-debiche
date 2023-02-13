@@ -14,27 +14,24 @@ const Product = (props) => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 2000);
   };
-
   return (
     <Card>
-      <Row>
-        <Col xs={6} md={4}>
-          <Image src={img} fluid />
-        </Col>
+      <Row className="d-flex align-items-center">
         <Col>
-          <Card.Body>
+          <Card.Body className="text-center">
+            {/* <Col xs={6}> */}
+              <Image  src={img} fluid />
+            {/* </Col> */}
             <Card.Title>{name}</Card.Title>
             <Card.Text>Prix: {price} DT</Card.Text>
             <Card.Text>Quantity: {quantity} </Card.Text>
             <Card.Text>Likes: {likes} </Card.Text>
-            <Button onClick={handleClick} style={{ marginRight: '15px' }}>
-  Like
-</Button>
-
-<Button variant="primary" onClick={buy} disabled={quantity === 0}>
-  Buy
-</Button>
-
+            <Button onClick={handleClick} style={{ marginRight: '80px' }}>
+              Like
+            </Button>
+            <Button variant="primary" onClick={buy} disabled={quantity === 0}>
+              Buy
+            </Button>
             {showAlert ? (
               <Alert className="mt-3" variant="success">
                 You bought an item.
@@ -45,6 +42,7 @@ const Product = (props) => {
       </Row>
     </Card>
   );
+  
 };
 
 export default Product;
