@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Image, Row, Col, Button, Alert } from 'react-bootstrap';
+import './Product.css';
 
 const Product = (props) => {
   const { name, price, img, quantity, description, like } = props;
@@ -14,19 +15,18 @@ const Product = (props) => {
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 2000);
   };
+
   return (
     <Card>
-      <Row className="d-flex align-items-center">
+      <Row>
         <Col>
-          <Card.Body className="text-center">
-            {/* <Col xs={6}> */}
-              <Image  src={img} fluid />
-            {/* </Col> */}
+          <Card.Body className={likes > 5 ? "bestProduct" : ""}>
+            <Image src={img} fluid />
             <Card.Title>{name}</Card.Title>
             <Card.Text>Prix: {price} DT</Card.Text>
             <Card.Text>Quantity: {quantity} </Card.Text>
             <Card.Text>Likes: {likes} </Card.Text>
-            <Button onClick={handleClick} style={{ marginRight: '80px' }}>
+            <Button onClick={handleClick} style={{ marginRight: '15px' }}>
               Like
             </Button>
             <Button variant="primary" onClick={buy} disabled={quantity === 0}>
@@ -42,7 +42,6 @@ const Product = (props) => {
       </Row>
     </Card>
   );
-  
 };
 
 export default Product;
