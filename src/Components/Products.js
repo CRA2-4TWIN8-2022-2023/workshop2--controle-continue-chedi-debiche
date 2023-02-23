@@ -1,72 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import Product from './Product';
-import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap';
-
-const products = [
-  {
-    name: 'PC Lenovo',
-    price: 1400,
-    img: 'product1.webp',
-    like: 0,
-    quantity: 10,
-    description: 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
-  },
-  {
-    name: 'Mouse',
-    price: 30,
-    img: 'product2.jpg',
-    like: 0,
-    quantity: 0,
-    description: 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
-  },
-  {
-    name: 'KeyBoard',
-    price: 70,
-    img: 'product3.jpg',
-    like: 0,
-    quantity: 20,
-    description: 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
+import CardGroup from "react-bootstrap/CardGroup";
+import products from "../products.json";
+import { Component } from "react";
+import Product from "./Product";
+import Alert from 'react-bootstrap/Alert';
+class Products extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = { showAlert: false,
+      showWelcome: true 
+    };
   }
-];
+  buy = (product,updateQuantity) => {
+    product.quantity--;
+    updateQuantity(product.quantity);
+    console.log( product.quantity--)
+    this.showAlert();
+    
+   };
 
-
-
-
-const Products = () => {
-    const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
-
-    useEffect(() => {
-      setTimeout(() => {  setShowWelcomeMessage(true);}, 3000);
-     }, []);
+   
+   showAlert = () => {
+    this.setState({ showAlert: true }, () => {
+      setTimeout(() => {
+        this.setState({ showAlert: false });
+      }, 2000);
+    });
+  };
   
-  return (
-    <Container>
-    {showWelcomeMessage && (
-      <Alert variant="success" onClose={() => setShowWelcomeMessage(false)} dismissible>
-        Hey , Welcome to our Shop <strong>MyStore</strong>
-        <br />
-        <small>Thank you for choosing our store, we hope you enjoy your shopping experience</small>
-      </Alert>
-    )}
-  
-    <Row>
-      {products.map((product, index) => {
-        return (
-          <Col sm={4} key={index}>
-            <Product {...product} />
-          </Col>
-        );
-      })}
-    </Row>
-  </Container>
-  
-  
-  
-  
-  
-  );
-};
+  componentDidMount() {
+    setTimeout(()=>{this.setState({ showWelcome: false })}, 3000);
+  }
+ render() {
+    return (
+      <>
+        {this.state.showWelcome && (
+          <Alert variant="success">Welcome to our store!</Alert>
+        )}
+        <CardGroup>
+          {products.map((p, i) => (
+             <Product key={i} product={p} buyFunction={this.buy}/>))}
+             
+         </CardGroup>
+         {this.state.showAlert && (
+          <Alert variant="success">You bought an Item</Alert>
+        )}
+        
+      </>
+    );
+  }
+}
 
 export default Products;
-
-
